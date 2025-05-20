@@ -1,0 +1,21 @@
+services:
+  activemq:
+    healthcheck:
+      test: [
+        CMD-SHELL,
+        'curl --fail http://admin:admin@localhost:8161/admin/ || exit 1'
+      ]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+      start_period: 5s
+    image: apache/activemq-classic:6.1.6
+    ports:
+    - {
+      target: 61616,
+      published: 61616
+    }
+    - {
+      target: 8161,
+      published: 8161
+    }
